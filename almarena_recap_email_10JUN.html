@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revenue Recap · Semana 10 de Junio 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #F0F4F2; color: #1A3A2A; font-size: 14px; line-height: 1.5; }
+
+  .wrapper { max-width: 620px; margin: 0 auto; padding: 24px 16px; }
+
+  /* ── HEADER ── */
+  .header { background: #1A3A2A; border-radius: 12px 12px 0 0; padding: 28px 32px; display: flex; align-items: center; justify-content: space-between; }
+  .header-logo { font-size: 22px; font-weight: 700; color: #C8A96E; letter-spacing: 2px; }
+  .header-logo span { display: block; font-size: 10px; font-weight: 400; color: #8EB09A; letter-spacing: 1.5px; margin-top: 2px; }
+  .header-date { text-align: right; color: #8EB09A; font-size: 12px; }
+  .header-date strong { display: block; color: #C8A96E; font-size: 15px; }
+
+  /* ── SUBHEADER ── */
+  .subheader { background: #C8A96E; padding: 10px 32px; font-weight: 600; font-size: 13px; color: #1A3A2A; letter-spacing: 0.5px; }
+
+  /* ── SECTION ── */
+  .section { background: #fff; padding: 22px 28px; border-left: 4px solid #C8A96E; margin-top: 2px; }
+  .section-last { border-radius: 0 0 12px 12px; }
+  .section-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #1A3A2A; border-bottom: 1.5px solid #E8F0EB; padding-bottom: 8px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+
+  /* ── HIGHLIGHT ── */
+  .highlight-box { background: linear-gradient(135deg, #1A3A2A, #2A5A40); border-radius: 10px; padding: 14px 18px; color: #fff; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+  .highlight-box .icon { font-size: 24px; flex-shrink: 0; }
+  .highlight-box .text strong { color: #C8A96E; display: block; font-size: 14px; }
+  .highlight-box .text span { font-size: 12px; color: #B0CDB8; }
+
+  /* ── KPI CARDS ── */
+  .kpi-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 6px; }
+  .kpi-box { background: #F8FAF9; border-radius: 8px; padding: 14px 16px; border-top: 3px solid #C8A96E; }
+  .kpi-box .prop { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #1A3A2A; margin-bottom: 8px; }
+  .kpi-box .metric { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; border-bottom: 1px solid #EDF2EF; }
+  .kpi-box .metric:last-child { border-bottom: none; }
+  .kpi-box .metric .lbl { color: #7A9A8A; }
+  .kpi-box .metric .val { font-weight: 600; color: #1A3A2A; }
+  .dev-neg { color: #C0392B; font-weight: 600; font-size: 11px; }
+  .dev-mid { color: #D4A017; font-weight: 600; font-size: 11px; }
+
+  /* ── REVENUE STRIP ── */
+  .rev-strip { background: #F8FAF9; border-left: 4px solid #C8A96E; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 12.5px; margin-bottom: 10px; }
+  .rev-strip strong { color: #1A3A2A; }
+
+  /* ── FDS ── */
+  .fds-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .fds-box { background: #F8FAF9; border-radius: 8px; padding: 12px 14px; border-top: 3px solid #C8A96E; }
+  .fds-box .prop { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #1A3A2A; margin-bottom: 8px; }
+  .fds-box table { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+  .fds-box table td { padding: 3px 0; color: #444; }
+  .fds-box table td:last-child { text-align: right; font-weight: 600; color: #1A3A2A; }
+  .fds-box .total-line { margin-top: 8px; padding-top: 8px; border-top: 1.5px solid #C8A96E; font-size: 12px; font-weight: 600; color: #1A3A2A; }
+
+  /* ── BULLET LIST ── */
+  .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .bullet-list li { font-size: 13px; padding-left: 16px; position: relative; color: #333; }
+  .bullet-list li::before { content: "·"; position: absolute; left: 0; font-weight: 700; color: #C8A96E; font-size: 18px; line-height: 1.2; }
+
+  /* ── GRUPOS ── */
+  .grupos-mini { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .grupos-mini td { padding: 6px 8px; border-bottom: 1px solid #F0F4F2; vertical-align: middle; }
+  .grupos-mini tr:last-child td { border-bottom: none; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 10px; font-weight: 700; }
+  .tag-pend { background: #FFF8E6; color: #7A5A00; border: 1px solid #F0D080; }
+  .tag-cancel { background: #FDE8E8; color: #C0392B; border: 1px solid #F5B7B1; }
+
+  /* ── PROMOS ── */
+  .promo-item { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; padding: 8px 12px; background: #F8FAF9; border-radius: 6px; margin-bottom: 5px; border-left: 3px solid #C8A96E; }
+  .promo-item.warn { background: #FFF8E6; border-left-color: #F39C12; }
+  .promo-item .dot { width: 7px; height: 7px; border-radius: 50%; background: #C8A96E; flex-shrink: 0; margin-top: 5px; }
+  .promo-item.warn .dot { background: #F39C12; }
+
+  /* ── CTA ── */
+  .cta { background: #F8FAF9; border-radius: 8px; padding: 14px 18px; font-size: 13px; color: #555; margin-top: 4px; border-left: 4px solid #C8A96E; }
+
+  /* ── PICKUP PILLS ── */
+  .pickup-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .pickup-pill { background: #1A3A2A; color: #C8A96E; padding: 4px 11px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+  .pickup-pill span { color: #8EB09A; font-weight: 400; margin-right: 4px; }
+
+  /* ── FOOTER ── */
+  .footer { text-align: center; padding: 18px; font-size: 11px; color: #7A9A8A; }
+
+  @media (max-width: 540px) {
+    .kpi-row, .fds-row { grid-template-columns: 1fr; }
+    .header { flex-direction: column; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-logo">
+      ALMARENA
+      <span>REVENUE MANAGEMENT</span>
+    </div>
+    <div class="header-date">
+      <strong>Semana 10 de Junio 2026</strong>
+      Reunión Revenue · Lunes 15 hs
+    </div>
+  </div>
+  <div class="subheader">📊 Revenue Weekly Recap — Costa del Este &amp; La Reserva</div>
+
+  <!-- ── KPIs ── -->
+  <div class="section">
+    <div class="section-title">📍 KPIs On The Books — Junio 2026</div>
+
+    <div class="kpi-row">
+      <div class="kpi-box">
+        <div class="prop">Costa del Este · 59 habs</div>
+        <div class="metric"><span class="lbl">%OCC</span><span class="val">14% <span class="dev-neg">▼ -22pp</span></span></div>
+        <div class="metric"><span class="lbl">Room Nights</span><span class="val">240 <span class="dev-neg">▼ -400</span></span></div>
+        <div class="metric"><span class="lbl">Revenue ARS</span><span class="val">$34.838.640</span></div>
+        <div class="metric"><span class="lbl">ADR ARS</span><span class="val">$145.161</span></div>
+        <div class="metric"><span class="lbl">RevPAR</span><span class="val">$19.683</span></div>
+      </div>
+      <div class="kpi-box">
+        <div class="prop">La Reserva · 57 habs</div>
+        <div class="metric"><span class="lbl">%OCC</span><span class="val">14% <span class="dev-mid">▼ -6pp</span></span></div>
+        <div class="metric"><span class="lbl">Room Nights</span><span class="val">238 <span class="dev-neg">▼ -104</span></span></div>
+        <div class="metric"><span class="lbl">Revenue ARS</span><span class="val">$23.030.381</span></div>
+        <div class="metric"><span class="lbl">ADR ARS</span><span class="val">$96.766</span></div>
+        <div class="metric"><span class="lbl">RevPAR</span><span class="val">$13.468</span></div>
+      </div>
+    </div>
+    <div style="font-size:10.5px;color:#7A9A8A;margin-top:6px;">Desvíos vs Budget. Budget CDE Junio: 36% OCC / $97.364.628. Budget ALR Junio: 20% OCC / $43.893.014.</div>
+
+    <div style="margin-top:14px;">
+      <div style="font-size:11px;color:#7A9A8A;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:6px;">Pick-Up Semanal</div>
+      <div class="pickup-row">
+        <div class="pickup-pill"><span>CDE Jun</span> +19 RN · 240 total · 14%</div>
+        <div class="pickup-pill"><span>CDE Jul</span> +4 RN · 130 total · 7%</div>
+        <div class="pickup-pill"><span>ALR Jun</span> +3 RN · 235 total · 14%</div>
+        <div class="pickup-pill"><span>ALR Jul</span> 0 · 62 total · 4%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FDS LARGO ── -->
+  <div class="section">
+    <div class="section-title">🏖️ Proyección Fin de Semana Largo — 12 al 14 de Junio</div>
+    <div class="fds-row">
+      <div class="fds-box">
+        <div class="prop">Costa del Este</div>
+        <table>
+          <tr><td>Vie 12</td><td>7 habs · 11,86%</td></tr>
+          <tr><td>Sáb 13</td><td>19 habs · 32,20%</td></tr>
+          <tr><td>Dom 14</td><td>19 habs · 32,20%</td></tr>
+        </table>
+        <div class="total-line">34,46% OCC · 61 RN · $6.926 · ADR $113,55 · RevPAR $39,13</div>
+      </div>
+      <div class="fds-box">
+        <div class="prop">La Reserva</div>
+        <table>
+          <tr><td>Vie 12</td><td>16 habs · 28,07%</td></tr>
+          <tr><td>Sáb 13</td><td>40 habs · 70,18%</td></tr>
+          <tr><td>Dom 14</td><td>40 habs · 70,18%</td></tr>
+        </table>
+        <div class="total-line">56,14% OCC · 96 RN · $7.372 · ADR $76,80 · RevPAR $43,11</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── RESERVAS ── -->
+  <div class="section">
+    <div class="section-title">📥 Reservas Ingresadas esta Semana (2–9 Jun)</div>
+    <ul class="bullet-list">
+      <li><strong>Costa del Este: 39 reservas.</strong> Motor principal: Promo Bosque 10% (11), Booking.com (4), FULL (4), Compra Anticipada (3), Mini Invierno (3).</li>
+      <li><strong>La Reserva: 75 reservas.</strong> Motor principal: Booking.com (24), Brisa 15% (18), Directo (8), F&amp;F/Referidos (7), Airbnb (4 res. · 8 noches), Mini Invierno (4).</li>
+    </ul>
+  </div>
+
+  <!-- ── GRUPOS ── -->
+  <div class="section">
+    <div class="section-title">🏢 Grupos &amp; Eventos — Cotizaciones Activas</div>
+    <table class="grupos-mini">
+      <tr>
+        <td><strong>CDE</strong></td>
+        <td>ADMIFARM</td>
+        <td>Agosto</td>
+        <td><span class="tag tag-pend">PENDIENTE</span></td>
+        <td style="text-align:right;font-weight:600;">$155.000</td>
+      </tr>
+      <tr>
+        <td><strong>CDE</strong></td>
+        <td>Boda Sol (25 rooms)</td>
+        <td>Nov</td>
+        <td><span class="tag tag-pend">PENDIENTE</span></td>
+        <td style="text-align:right;font-weight:600;">$155.000</td>
+      </tr>
+      <tr>
+        <td><strong>CDE</strong></td>
+        <td>Boda Soledad &amp; Eliana (60 pax)</td>
+        <td>—</td>
+        <td><span class="tag tag-pend">PENDIENTE</span></td>
+        <td style="text-align:right;">—</td>
+      </tr>
+      <tr>
+        <td><strong>CDE</strong></td>
+        <td>Taller de Redes (evento)</td>
+        <td>Junio</td>
+        <td><span class="tag tag-pend">PENDIENTE</span></td>
+        <td style="text-align:right;">—</td>
+      </tr>
+      <tr>
+        <td><strong>CDE</strong></td>
+        <td>Retiro de Yoga – Elizabeth Espinola</td>
+        <td>Sept</td>
+        <td><span class="tag tag-pend">PENDIENTE</span></td>
+        <td style="text-align:right;font-weight:600;">$115.000</td>
+      </tr>
+      <tr>
+        <td><strong>CDE</strong></td>
+        <td>Retiro de Yoga – Graciela</td>
+        <td>9–11 Abr</td>
+        <td><span class="tag tag-pend">PENDIENTE</span></td>
+        <td style="text-align:right;font-weight:600;">$165.000</td>
+      </tr>
+      <tr>
+        <td><strong>CDE</strong></td>
+        <td>Grupo Bienestar Pilates – Carolina Acha</td>
+        <td>9–11 Nov</td>
+        <td><span class="tag tag-pend">PENDIENTE</span></td>
+        <td style="text-align:right;font-weight:600;">$150.000</td>
+      </tr>
+      <tr>
+        <td><strong>CDE</strong></td>
+        <td>Evento Grupal – Michele Giorgio (20 mujeres)</td>
+        <td>Sept · 3n</td>
+        <td><span class="tag tag-pend">PENDIENTE</span></td>
+        <td style="text-align:right;">—</td>
+      </tr>
+      <tr>
+        <td><strong>CDE</strong></td>
+        <td style="color:#888;">Delegación Eq. Deportivo – Valeria Vasoni (70-80 pax)<br><span style="font-size:10px;color:#aaa;">Seguimiento: Fernanda Mongiano</span></td>
+        <td style="color:#888;">—</td>
+        <td><span class="tag tag-cancel">CANCELADO</span></td>
+        <td style="text-align:right;">—</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ── PROMOCIONES ── -->
+  <div class="section section-last">
+    <div class="section-title">🏷️ Estado de Promociones</div>
+
+    <!-- Novedades -->
+    <div style="background:#E8F5EE;border-left:4px solid #1A7A4A;padding:10px 14px;border-radius:0 6px 6px 0;margin-bottom:14px;font-size:13px;">
+      <strong style="color:#1A6A3A;">Novedades esta semana:</strong> Se extendió la <strong>Preventa Vacaciones de Invierno en CDE</strong> y se ajustaron los <strong>mínimos de noches a 2</strong> en ambas propiedades.
+    </div>
+
+    <!-- Por vencer -->
+    <div style="font-size:11px;color:#7A5A00;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;">⚠️ Por vencer — Jueves 11 de Junio</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;">
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:500;background:#FFF8E6;color:#7A5A00;border:1px solid #F0D080;"><span style="width:7px;height:7px;border-radius:50%;background:#F39C12;display:inline-block;"></span>CDE · Last Minute 20% · Sin mínimo</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:500;background:#FFF8E6;color:#7A5A00;border:1px solid #F0D080;"><span style="width:7px;height:7px;border-radius:50%;background:#F39C12;display:inline-block;"></span>ALR · Last Minute 30% · Sin mínimo</span>
+    </div>
+
+    <!-- CDE activas -->
+    <div style="font-size:11px;color:#1A6A3A;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;">Costa del Este — Activas</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;">
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:500;background:#E8F5EE;color:#1A6A3A;border:1px solid #B2DFC5;"><span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;"></span>Día del Padre Op.1: Voucher fecha abierta · Suite Ejecutiva $150.000 · Early/Late CO + obsequio · Hasta 30/11 · Sin feriados</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:500;background:#E8F5EE;color:#1A6A3A;border:1px solid #B2DFC5;"><span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;"></span>Día del Padre Op.2: 20/6 → 21/6 · 15% off + Late CO domingo · Sin mínimo</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:500;background:#E8F5EE;color:#1A6A3A;border:1px solid #B2DFC5;"><span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;"></span>Vacaciones de Invierno 15% off · 2 personas · Min 2 noches</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:500;background:#E8F5EE;color:#1A6A3A;border:1px solid #B2DFC5;"><span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;"></span>Feriado Junio 25% off · 4+ personas · Min 2 noches</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:500;background:#E8F5EE;color:#1A6A3A;border:1px solid #B2DFC5;"><span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;"></span>Booking 30% Getaway · BW hasta 30/06 · Excl. feriados</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:500;background:#E8F5EE;color:#1A6A3A;border:1px solid #B2DFC5;"><span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;"></span>Promo Bosque 10% · 2-3 noches · TW hasta 30/06</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:500;background:#E8F5EE;color:#1A6A3A;border:1px solid #B2DFC5;"><span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;"></span>Promo Mar 20% · 4+ noches · TW hasta 30/06</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:500;background:#E8F5EE;color:#1A6A3A;border:1px solid #B2DFC5;"><span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;"></span>Preventa Vac. Invierno · 4n 20% / 5n+ 30% (extendida ✓)</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:500;background:#E8F5EE;color:#1A6A3A;border:1px solid #B2DFC5;"><span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;"></span>Compra Anticipada · Ago–Nov · Incl. feriados</span>
+    </div>
+
+    <!-- ALR activas -->
+    <div style="font-size:11px;color:#1A6A3A;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;">La Reserva — Activas</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;">
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:500;background:#E8F5EE;color:#1A6A3A;border:1px solid #B2DFC5;"><span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;"></span>Día del Padre Op.1: Voucher fecha abierta · Depto 3 Amb Bosque $140.000 · Early/Late CO + obsequio · Hasta 30/11 · Sin feriados</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:500;background:#E8F5EE;color:#1A6A3A;border:1px solid #B2DFC5;"><span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;"></span>Día del Padre Op.2: 20/6 → 21/6 · 15% off + Late CO domingo · Sin mínimo</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:500;background:#E8F5EE;color:#1A6A3A;border:1px solid #B2DFC5;"><span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;"></span>Booking 30% Getaway + Despegar · Excl. feriados</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:500;background:#E8F5EE;color:#1A6A3A;border:1px solid #B2DFC5;"><span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;"></span>Early Booker Deal 15% · +15 días antes · Booking</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:500;background:#E8F5EE;color:#1A6A3A;border:1px solid #B2DFC5;"><span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;"></span>Booking 15% Mobile App</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:500;background:#E8F5EE;color:#1A6A3A;border:1px solid #B2DFC5;"><span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;"></span>May Sale 2026 15–25% · hasta Junio</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:500;background:#E8F5EE;color:#1A6A3A;border:1px solid #B2DFC5;"><span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;"></span>Promo Brisa 15% · 2-3 noches · TW hasta 30/06</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:500;background:#E8F5EE;color:#1A6A3A;border:1px solid #B2DFC5;"><span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;"></span>Promo Reset 20% · 4+ noches · TW hasta 30/06</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:500;background:#E8F5EE;color:#1A6A3A;border:1px solid #B2DFC5;"><span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;"></span>40% Allaria F&amp;F Referidos · Junio</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:500;background:#E8F5EE;color:#1A6A3A;border:1px solid #B2DFC5;"><span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;"></span>40% off 4 Ambientes · Activo hasta Nov · Min 3 noches</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11.5px;font-weight:500;background:#E8F5EE;color:#1A6A3A;border:1px solid #B2DFC5;"><span style="width:7px;height:7px;border-radius:50%;background:#2ECC71;display:inline-block;"></span>Preventa Vac. Invierno · 3/4n 25% / 5n+ 35%</span>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <strong style="color:#1A3A2A;">Almarena Apart &amp; Hotel Boutique · La Reserva</strong><br>
+    Reunión Revenue Management · 10 de Junio 2026 · 15 hs · Google Meet<br>
+    <span style="color:#C8A96E;">chiara.zannini@almarena.com.ar</span>
+  </div>
+
+</div>
+</body>
+</html>
