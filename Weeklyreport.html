@@ -3,831 +3,581 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Revenue Management Weekly · Almarena · 22 de Junio 2026</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #f0f0f0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; color: #1a1a1a; font-size: 14px; line-height: 1.5; }
-  .container { max-width: 640px; margin: 0 auto; background: #fff; }
-
-  /* HEADER */
-  .header { background: #111; padding: 28px 32px 24px; }
-  .header-label { color: #999; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 6px; }
-  .header-title { color: #fff; font-size: 28px; font-weight: 700; margin-bottom: 4px; }
-  .header-date { color: #aaa; font-size: 13px; margin-bottom: 0; }
-  .header-right { float: right; text-align: right; }
-  .header-brand { color: #c8a96e; font-size: 14px; font-weight: 700; letter-spacing: 2px; }
-  .header-props { color: #777; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
-  .header-clearfix { clear: both; }
-
-  /* INTRO */
-  .intro { padding: 20px 32px; border-bottom: 1px solid #eee; color: #444; font-size: 14px; line-height: 1.6; }
-
-  /* PROPERTY SECTION */
-  .property-header { background: #111; padding: 14px 32px; display: flex; align-items: baseline; gap: 12px; }
-  .property-name { color: #e05050; font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
-  .property-desc { color: #888; font-size: 11px; letter-spacing: 0.5px; }
-  .property-body { padding: 20px 32px; border-bottom: 2px solid #eee; }
-
-  /* SUBHEADER */
-  .sub-head { color: #e05050; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 6px; }
-  .sub-head::before { content: '+'; font-size: 14px; font-weight: 700; }
-
-  /* KPI CARDS */
-  .kpi-row { display: flex; gap: 8px; margin-bottom: 16px; }
-  .kpi-card { flex: 1; border: 1px solid #e8e8e8; border-radius: 4px; padding: 12px 8px; text-align: center; }
-  .kpi-label { font-size: 9px; color: #999; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
-  .kpi-value { font-size: 22px; font-weight: 700; color: #111; line-height: 1; margin-bottom: 5px; }
-  .kpi-value.sm { font-size: 16px; }
-  .kpi-dev { font-size: 11px; line-height: 1.3; }
-  .kpi-dev .down { color: #e05050; }
-  .kpi-dev .up { color: #27ae60; }
-  .kpi-bdg { color: #999; font-size: 10px; }
-
-  /* VS LY BLOCK */
-  .vs-ly { border-left: 3px solid #e05050; padding: 8px 12px; margin-bottom: 10px; background: #fafafa; font-size: 12.5px; color: #444; }
-  .vs-ly strong { color: #111; }
-
-  /* PROJECTION TABLE */
-  .proj-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 0; }
-  .proj-table th { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #e05050; font-weight: 600; padding: 6px 0; text-align: left; border-bottom: 1px solid #eee; }
-  .proj-table td { padding: 7px 0; border-bottom: 1px solid #f5f5f5; color: #333; }
-  .proj-table td.neg { color: #e05050; font-weight: 600; }
-  .proj-table td.pos { color: #27ae60; font-weight: 600; }
-  .proj-table tr:last-child td { border-bottom: none; }
-
-  /* SECTION HEADER (dark bar with emoji) */
-  .section-header { background: #111; padding: 13px 32px; display: flex; align-items: center; gap: 12px; }
-  .section-header .icon { font-size: 16px; }
-  .section-header .title { color: #fff; font-size: 13px; font-weight: 600; }
-  .section-body { padding: 20px 32px; border-bottom: 2px solid #eee; }
-
-  /* PICKUP TABLE */
-  .data-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
-  .data-table th { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #e05050; font-weight: 600; padding: 6px 0; text-align: left; border-bottom: 1px solid #eee; }
-  .data-table td { padding: 8px 0; border-bottom: 1px solid #f5f5f5; color: #333; }
-  .data-table td.green { color: #27ae60; font-weight: 600; }
-  .data-table td.red { color: #e05050; font-weight: 600; }
-  .data-table td.muted { color: #bbb; }
-  .data-table tr:last-child td { border-bottom: none; }
-
-  /* FDS CARDS */
-  .fds-grid { display: flex; gap: 16px; }
-  .fds-card { flex: 1; }
-  .fds-card-title { color: #e05050; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
-  .fds-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #f5f5f5; font-size: 12.5px; }
-  .fds-row:last-child { border-bottom: none; }
-  .fds-day { color: #e05050; }
-  .fds-val { font-weight: 600; color: #333; }
-  .fds-total { margin-top: 10px; background: #f8f8f8; border-radius: 4px; padding: 10px 12px; font-size: 12px; color: #444; }
-  .fds-total strong { color: #111; }
-
-  /* NOVEDADES */
-  .novedad-item { display: flex; gap: 10px; margin-bottom: 12px; align-items: flex-start; }
-  .novedad-item:last-child { margin-bottom: 0; }
-  .novedad-dot { width: 6px; height: 6px; background: #e05050; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
-  .novedad-text { font-size: 13px; color: #444; line-height: 1.5; }
-  .novedad-text strong { color: #e05050; }
-
-  /* RESERVAS */
-  .reservas-sub { color: #e05050; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
-  .reservas-sub::before { content: '+'; font-size: 13px; font-weight: 700; }
-  .reservas-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 20px; }
-  .reservas-table th { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #e05050; font-weight: 600; padding: 6px 0; text-align: left; border-bottom: 1px solid #eee; }
-  .reservas-table th:not(:first-child) { text-align: right; }
-  .reservas-table td { padding: 7px 0; border-bottom: 1px solid #f5f5f5; color: #333; }
-  .reservas-table td:not(:first-child) { text-align: right; color: #555; }
-  .reservas-table tr:last-child td { border-bottom: none; }
-
-  /* GRUPOS TABLE */
-  .grupos-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-  .grupos-table th { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #e05050; font-weight: 600; padding: 6px 4px; text-align: left; border-bottom: 1px solid #eee; }
-  .grupos-table td { padding: 8px 4px; border-bottom: 1px solid #f5f5f5; color: #333; vertical-align: top; }
-  .grupos-table tr:last-child td { border-bottom: none; }
-  .badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 10px; white-space: nowrap; }
-  .badge-ok { background: #eaf7ee; color: #27ae60; }
-  .badge-follow { background: #fff3f3; color: #e05050; }
-  .badge-quoted { background: #f0f0ff; color: #5555bb; }
-  .badge-cancel { background: #f5f5f5; color: #aaa; text-decoration: line-through; }
-
-  /* PROMOTIONS */
-  .promo-prop-title { color: #e05050; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin: 16px 0 10px; display: flex; align-items: center; gap: 6px; }
-  .promo-prop-title::before { content: '+'; font-size: 13px; font-weight: 700; }
-  .promo-item { display: flex; gap: 8px; margin-bottom: 8px; align-items: flex-start; }
-  .promo-dash { color: #e05050; font-weight: 700; flex-shrink: 0; }
-  .promo-text { font-size: 12.5px; color: #444; line-height: 1.5; }
-  .promo-text strong { color: #111; }
-  .promo-new { display: inline-block; background: #e05050; color: #fff; font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 3px; letter-spacing: 0.5px; margin-left: 4px; vertical-align: middle; }
-
-  /* BENEFICIOS TABLE */
-  .bene-table { width: 100%; border-collapse: collapse; font-size: 11.5px; margin-top: 12px; }
-  .bene-table th { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #e05050; font-weight: 600; padding: 6px 6px; text-align: left; border-bottom: 1px solid #eee; }
-  .bene-table td { padding: 8px 6px; border-bottom: 1px solid #f5f5f5; color: #333; vertical-align: top; }
-  .bene-table td:first-child { font-weight: 700; color: #111; white-space: nowrap; width: 140px; }
-  .bene-table tr:last-child td { border-bottom: none; }
-
-  /* FOOTER */
-  .footer { background: #111; padding: 24px 32px; }
-  .footer-sign { color: #fff; font-size: 13px; margin-bottom: 4px; }
-  .footer-sign strong { color: #e05050; }
-  .footer-sub { color: #666; font-size: 11px; }
-</style>
+<title>Revenue Management Weekly · Almarena · 29 de Junio 2026</title>
 </head>
-<body>
-<div class="container">
+<body style="margin:0;padding:0;background:#F2F2F0;font-family:'Segoe UI',Arial,sans-serif;color:#1A1A1A;">
+
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#F2F2F0;padding:32px 0;">
+<tr><td align="center">
+<table width="640" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:10px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,0.09);">
 
   <!-- HEADER -->
-  <div class="header">
-    <div class="header-right">
-      <div class="header-brand">ALMARENA</div>
-      <div class="header-props">La Reserva · Costa del Este</div>
-    </div>
-    <div class="header-label">Revenue Management</div>
-    <div class="header-title">Resumen Semanal</div>
-    <div class="header-date">22 de Junio de 2026</div>
-    <div class="header-clearfix"></div>
-  </div>
+  <tr>
+    <td style="background:#0D0D0D;padding:26px 32px 20px;">
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td>
+            <div style="font-size:10px;color:#AE987A;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;">Revenue Management</div>
+            <div style="font-size:21px;font-weight:700;color:#FFFFFF;letter-spacing:1px;">Resumen Semanal</div>
+            <div style="font-size:13px;color:#6B6B6B;margin-top:4px;">29 de Junio de 2026</div>
+          </td>
+          <td align="right" valign="middle">
+            <div style="font-size:14px;font-weight:700;color:#AE987A;letter-spacing:3px;">ALMARENA</div>
+            <div style="font-size:10px;color:#555;letter-spacing:1px;margin-top:2px;">LA RESERVA  |  COSTA DEL ESTE</div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
 
-  <!-- INTRO -->
-  <div class="intro">
-    Hola a todos, les comparto el resumen de la reunión de Revenue Management de esta semana con los datos On The Books al 22 de junio.
-  </div>
+  <!-- BODY -->
+  <tr><td style="padding:28px 32px;">
 
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- ALMARENA COSTA DEL ESTE                        -->
-  <!-- ═══════════════════════════════════════════════ -->
-  <div class="property-header">
-    <span class="property-name">Almarena Costa del Este</span>
-    <span class="property-desc">Apart &amp; Hotel Boutique · 59 habs</span>
-  </div>
-  <div class="property-body">
+    <p style="margin:0 0 24px;font-size:14px;color:#4B5563;line-height:1.7;">Hola a todos, les comparto el resumen de Revenue Management de esta semana con el estado de Junio a cierre y la proyección de Julio, Agosto y Septiembre.</p>
 
-    <div class="sub-head">Junio — On the Books</div>
-    <div class="kpi-row">
-      <div class="kpi-card">
-        <div class="kpi-label">OCC</div>
-        <div class="kpi-value">22%</div>
-        <div class="kpi-dev"><span class="down">▼ Bdg 25%</span></div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">RN</div>
-        <div class="kpi-value">394</div>
-        <div class="kpi-dev"><span class="down">▼ −56 vs bdg</span></div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">ADR</div>
-        <div class="kpi-value sm">$154.283</div>
-        <div class="kpi-dev"><span class="up">▲ +$2.150 vs bdg</span></div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">RevPAR</div>
-        <div class="kpi-value sm">$34.343</div>
-        <div class="kpi-dev"><span class="down">▼ Bdg $38.033</span></div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Revenue</div>
-        <div class="kpi-value sm">$60,8M</div>
-        <div class="kpi-dev"><span class="down">▼ Bdg $68,5M</span></div>
-      </div>
-    </div>
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- COSTA DEL ESTE                              -->
+    <!-- ═══════════════════════════════════════════ -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+      <tr>
+        <td style="background:#0D0D0D;padding:11px 16px;border-radius:8px 8px 0 0;">
+          <span style="font-size:14px;font-weight:700;color:#FA575F;letter-spacing:1px;">ALMARENA COSTA DEL ESTE</span>
+          <span style="font-size:11px;color:#555;margin-left:8px;">Apart &amp; Hotel Boutique · 59 habs</span>
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #E8E3DA;border-top:none;padding:18px;border-radius:0 0 8px 8px;background:#FAFAF9;">
 
-    <div class="vs-ly">
-      <strong>vs Last Year 2025:</strong> OCC −9pp · RN −153 · Last Year: 31% OCC / 547 RN / $78,9M
-    </div>
-    <div class="vs-ly" style="margin-bottom:16px;">
-      <strong>STLY Junio:</strong> <span style="color:#e05050; font-weight:600;">▼ −153 noches</span> vs mismo período año pasado · posición desfavorable en pace.
-    </div>
+          <!-- ESTADO JUNIO -->
+          <div style="font-size:10px;font-weight:700;color:#FA575F;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">✦ Estado de Junio — On the Books</div>
+          <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;">
+            <tr>
+              <td width="18%" style="background:#FFFFFF;border:1px solid #E8E3DA;border-radius:6px;padding:10px 6px;text-align:center;">
+                <div style="font-size:9px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">OCC</div>
+                <div style="font-size:22px;font-weight:700;color:#1A1A1A;line-height:1;">25%</div>
+                <div style="font-size:9px;color:#6B7280;margin-top:3px;">Bdg 25%</div>
+              </td>
+              <td width="2%"></td>
+              <td width="18%" style="background:#FFFFFF;border:1px solid #E8E3DA;border-radius:6px;padding:10px 6px;text-align:center;">
+                <div style="font-size:9px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">RN</div>
+                <div style="font-size:22px;font-weight:700;color:#1A1A1A;line-height:1;">451</div>
+                <div style="font-size:9px;color:#2E7D4F;margin-top:3px;font-weight:600;">▲ +1 vs bdg</div>
+              </td>
+              <td width="2%"></td>
+              <td width="20%" style="background:#FFFFFF;border:1px solid #E8E3DA;border-radius:6px;padding:10px 6px;text-align:center;">
+                <div style="font-size:9px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">ADR</div>
+                <div style="font-size:16px;font-weight:700;color:#1A1A1A;line-height:1;">$147.047</div>
+                <div style="font-size:9px;color:#CC3333;margin-top:3px;font-weight:600;">▼ −$5.086 vs bdg</div>
+              </td>
+              <td width="2%"></td>
+              <td width="18%" style="background:#FFFFFF;border:1px solid #E8E3DA;border-radius:6px;padding:10px 6px;text-align:center;">
+                <div style="font-size:9px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">RevPAR</div>
+                <div style="font-size:16px;font-weight:700;color:#1A1A1A;line-height:1;">$37.468</div>
+                <div style="font-size:9px;color:#6B7280;margin-top:3px;">Bdg $38.033</div>
+              </td>
+              <td width="2%"></td>
+              <td width="18%" style="background:#FFFFFF;border:1px solid #E8E3DA;border-radius:6px;padding:10px 6px;text-align:center;">
+                <div style="font-size:9px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Revenue</div>
+                <div style="font-size:15px;font-weight:700;color:#1A1A1A;line-height:1;">$66,3M</div>
+                <div style="font-size:9px;color:#CC3333;margin-top:3px;font-weight:600;">▼ −$2,1M vs bdg</div>
+              </td>
+            </tr>
+          </table>
 
-    <div class="sub-head">Proyección Mensual OTB</div>
-    <table class="proj-table">
-      <thead>
-        <tr>
-          <th>Mes</th>
-          <th>%OCC</th>
-          <th>RN</th>
-          <th>Revenue ARS</th>
-          <th>ADR ARS</th>
-          <th>RevPAR</th>
-          <th>Desvío vs Bdg</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Junio</td>
-          <td>22%</td>
-          <td>394</td>
-          <td>$60.787.365</td>
-          <td>$154.283</td>
-          <td>$34.343</td>
-          <td class="neg">−3pp · −$7,7M</td>
-        </tr>
-        <tr>
-          <td>Julio</td>
-          <td>12%</td>
-          <td>222</td>
-          <td>$56.433.304</td>
-          <td>$254.204</td>
-          <td>$30.855</td>
-          <td class="neg">−37pp · −$156,6M</td>
-        </tr>
-        <tr>
-          <td>Agosto</td>
-          <td>1%</td>
-          <td>18</td>
-          <td>$841.072</td>
-          <td>$46.726</td>
-          <td>$460</td>
-          <td class="neg">−34pp</td>
-        </tr>
-        <tr>
-          <td>Septiembre</td>
-          <td>9%</td>
-          <td>152</td>
-          <td>$16.908.581</td>
-          <td>$111.241</td>
-          <td>$9.553</td>
-          <td class="neg">−32pp</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+          <!-- vs LY -->
+          <div style="background:#F5F5F3;border-left:3px solid #FA575F;padding:8px 12px;border-radius:0 5px 5px 0;margin-bottom:14px;font-size:12px;color:#374151;">
+            <strong style="color:#FA575F;">vs Last Year 2025 (Jun):</strong>&nbsp; OCC −6% (31%→25%) &nbsp;·&nbsp; RN −96 (547→451) &nbsp;·&nbsp; <span style="color:#2E7D4F;font-weight:600;">ADR +$2.731 ✓</span> &nbsp;·&nbsp; Revenue −$12,6M &nbsp;·&nbsp; RevPAR −$7.270
+          </div>
 
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- ALMARENA LA RESERVA                            -->
-  <!-- ═══════════════════════════════════════════════ -->
-  <div class="property-header">
-    <span class="property-name">Almarena La Reserva</span>
-    <span class="property-desc">57 habs</span>
-  </div>
-  <div class="property-body">
+          <!-- PACE JULIO / AGOSTO / SEPTIEMBRE -->
+          <div style="font-size:10px;font-weight:700;color:#FA575F;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;">✦ Pace — Julio / Agosto / Septiembre</div>
+          <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;margin-bottom:6px;font-size:12px;">
+            <tr style="background:#0D0D0D;">
+              <td style="padding:7px 10px;color:#AE987A;font-weight:700;font-size:10px;letter-spacing:1px;border-radius:4px 0 0 0;width:22%;">MES</td>
+              <td style="padding:7px 10px;color:#9CA3AF;font-weight:600;font-size:10px;text-align:center;">OCC OTB</td>
+              <td style="padding:7px 10px;color:#9CA3AF;font-weight:600;font-size:10px;text-align:center;">RN OTB</td>
+              <td style="padding:7px 10px;color:#9CA3AF;font-weight:600;font-size:10px;text-align:center;">ADR OTB</td>
+              <td style="padding:7px 10px;color:#9CA3AF;font-weight:600;font-size:10px;text-align:center;">Revenue OTB</td>
+              <td style="padding:7px 10px;color:#9CA3AF;font-weight:600;font-size:10px;text-align:center;">OCC Bdg</td>
+              <td style="padding:7px 10px;color:#9CA3AF;font-weight:600;font-size:10px;text-align:right;border-radius:0 4px 0 0;">vs LY</td>
+            </tr>
+            <tr style="background:#FFFFFF;">
+              <td style="padding:8px 10px;font-weight:700;color:#FA575F;border-bottom:1px solid #F0ECE6;">JULIO</td>
+              <td style="padding:8px 10px;text-align:center;font-weight:700;color:#CC3333;border-bottom:1px solid #F0ECE6;">15%</td>
+              <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #F0ECE6;">275</td>
+              <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #F0ECE6;">$252.995</td>
+              <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #F0ECE6;">$69,6M</td>
+              <td style="padding:8px 10px;text-align:center;color:#AE987A;font-weight:700;border-bottom:1px solid #F0ECE6;">49%</td>
+              <td style="padding:8px 10px;text-align:right;color:#CC3333;font-size:11px;border-bottom:1px solid #F0ECE6;">−30% · −547 RN (LY 45%)</td>
+            </tr>
+            <tr style="background:#FAFAF9;">
+              <td style="padding:8px 10px;font-weight:700;color:#FA575F;border-bottom:1px solid #F0ECE6;">AGOSTO</td>
+              <td style="padding:8px 10px;text-align:center;font-weight:700;color:#CC3333;border-bottom:1px solid #F0ECE6;">2%</td>
+              <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #F0ECE6;">32</td>
+              <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #F0ECE6;">$88.231</td>
+              <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #F0ECE6;">$2,8M</td>
+              <td style="padding:8px 10px;text-align:center;color:#AE987A;font-weight:700;border-bottom:1px solid #F0ECE6;">35%</td>
+              <td style="padding:8px 10px;text-align:right;color:#CC3333;font-size:11px;border-bottom:1px solid #F0ECE6;">−35% · −656 RN (LY 37%)</td>
+            </tr>
+            <tr style="background:#FFFFFF;">
+              <td style="padding:8px 10px;font-weight:700;color:#FA575F;">SEPTIEMBRE</td>
+              <td style="padding:8px 10px;text-align:center;font-weight:700;color:#CC3333;">9%</td>
+              <td style="padding:8px 10px;text-align:center;">154</td>
+              <td style="padding:8px 10px;text-align:center;">$112.182</td>
+              <td style="padding:8px 10px;text-align:center;">$17,3M</td>
+              <td style="padding:8px 10px;text-align:center;color:#AE987A;font-weight:700;">41%</td>
+              <td style="padding:8px 10px;text-align:right;color:#CC3333;font-size:11px;">−31% · −569 RN (LY 40%)</td>
+            </tr>
+          </table>
 
-    <div class="sub-head">Junio — On the Books</div>
-    <div class="kpi-row">
-      <div class="kpi-card">
-        <div class="kpi-label">OCC</div>
-        <div class="kpi-value">19%</div>
-        <div class="kpi-dev"><span class="down">▼ Bdg 20%</span></div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">RN</div>
-        <div class="kpi-value">331</div>
-        <div class="kpi-dev"><span class="down">▼ −11 vs bdg</span></div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">ADR</div>
-        <div class="kpi-value sm">$101.429</div>
-        <div class="kpi-dev"><span class="down">▼ −$26.913 vs bdg</span></div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">RevPAR</div>
-        <div class="kpi-value sm">$19.633</div>
-        <div class="kpi-dev"><span class="down">▼ Bdg $25.668</span></div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Revenue</div>
-        <div class="kpi-value sm">$33,6M</div>
-        <div class="kpi-dev"><span class="down">▼ Bdg $43,9M</span></div>
-      </div>
-    </div>
-
-    <div class="vs-ly" style="margin-bottom:16px;">
-      <strong>Pick-up semanal:</strong> inicio de mes +3 RN · pick-up daily +6 RN · OTB actual 331 RN (19%)
-    </div>
-
-    <div class="sub-head">Proyección Mensual OTB</div>
-    <table class="proj-table">
-      <thead>
-        <tr>
-          <th>Mes</th>
-          <th>%OCC</th>
-          <th>RN</th>
-          <th>Revenue ARS</th>
-          <th>ADR ARS</th>
-          <th>RevPAR</th>
-          <th>Desvío vs Bdg</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Junio</td>
-          <td>19%</td>
-          <td>331</td>
-          <td>$33.573.119</td>
-          <td>$101.429</td>
-          <td>$19.633</td>
-          <td class="neg">−1pp · −$10,3M</td>
-        </tr>
-        <tr>
-          <td>Julio</td>
-          <td>9%</td>
-          <td>152</td>
-          <td>$22.673.435</td>
-          <td>$149.167</td>
-          <td>$12.832</td>
-          <td class="neg">−21pp · −$84,3M</td>
-        </tr>
-        <tr>
-          <td>Agosto</td>
-          <td>2%</td>
-          <td>29</td>
-          <td>$4.319.127</td>
-          <td>$148.935</td>
-          <td>$2.444</td>
-          <td class="neg">−18pp</td>
-        </tr>
-        <tr>
-          <td>Septiembre</td>
-          <td>0%</td>
-          <td>0</td>
-          <td>—</td>
-          <td>—</td>
-          <td>—</td>
-          <td class="neg">−28pp</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- PICK-UP SEMANAL                                -->
-  <!-- ═══════════════════════════════════════════════ -->
-  <div class="section-header">
-    <span class="icon">📈</span>
-    <span class="title">Pick-Up Semanal · 17–22 Jun</span>
-  </div>
-  <div class="section-body">
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>Mes</th>
-          <th>CDE · RN</th>
-          <th>CDE · OCC</th>
-          <th>CDE · Semana</th>
-          <th>ALR · RN</th>
-          <th>ALR · OCC</th>
-          <th>ALR · Semana</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Junio</td>
-          <td>394</td>
-          <td>22%</td>
-          <td class="green">+50</td>
-          <td>331</td>
-          <td>19%</td>
-          <td class="green">+39</td>
-        </tr>
-        <tr>
-          <td>Julio</td>
-          <td>222</td>
-          <td>12%</td>
-          <td class="green">+31</td>
-          <td>152</td>
-          <td>9%</td>
-          <td class="green">+42</td>
-        </tr>
-        <tr>
-          <td>Agosto</td>
-          <td>18</td>
-          <td>1%</td>
-          <td class="green">+18</td>
-          <td>29</td>
-          <td>2%</td>
-          <td class="green">+7</td>
-        </tr>
-        <tr>
-          <td>Septiembre</td>
-          <td>152</td>
-          <td>9%</td>
-          <td class="muted">—</td>
-          <td>0</td>
-          <td>0%</td>
-          <td class="muted">0</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- CIERRE FIN DE SEMANA                           -->
-  <!-- ═══════════════════════════════════════════════ -->
-  <div class="section-header">
-    <span class="icon">✅</span>
-    <span class="title">Cierre Fin de Semana · 19–20 Jun 2026</span>
-  </div>
-  <div class="section-body">
-    <div class="fds-grid">
-      <div class="fds-card">
-        <div class="fds-card-title">Costa del Este</div>
-        <div class="fds-row"><span class="fds-day">Vie 19/Jun</span><span class="fds-val">26 habs · 44.07%</span></div>
-        <div class="fds-row"><span class="fds-day">Sáb 20/Jun</span><span class="fds-val">36 habs · 61.02%</span></div>
-        <div class="fds-total">
-          <strong>62 habs · 52.54% OCC</strong><br>
-          Revenue USD 6.889 · ADR USD 111 · RevPAR USD 58
-        </div>
-      </div>
-      <div class="fds-card">
-        <div class="fds-card-title">La Reserva</div>
-        <div class="fds-row"><span class="fds-day">Vie 19/Jun</span><span class="fds-val">25 habs · 43.86%</span></div>
-        <div class="fds-row"><span class="fds-day">Sáb 20/Jun</span><span class="fds-val">26 habs · 45.61%</span></div>
-        <div class="fds-total">
-          <strong>51 habs · 44.74% OCC</strong><br>
-          Revenue USD 3.357 · ADR USD 66 · RevPAR USD 29
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- NOVEDADES                                      -->
-  <!-- ═══════════════════════════════════════════════ -->
-  <div class="section-header">
-    <span class="icon">⚡</span>
-    <span class="title">Novedades de la Semana</span>
-  </div>
-  <div class="section-body">
-    <div class="novedad-item">
-      <div class="novedad-dot"></div>
-      <div class="novedad-text"><strong>Promo Bosque 10% — Costa del Este:</strong> principal canal de promoción directa esta semana con 6 reservas (21% del mix). Buen ritmo de ingreso para el resto de junio y julio.</div>
-    </div>
-    <div class="novedad-item">
-      <div class="novedad-dot"></div>
-      <div class="novedad-text"><strong>Promo Brisa 15% — La Reserva:</strong> 6 reservas ingresadas esta semana (19% del mix ALR), consolidándose como el principal canal de promoción directa de la propiedad.</div>
-    </div>
-    <div class="novedad-item">
-      <div class="novedad-dot"></div>
-      <div class="novedad-text"><strong>🏆 OTB Junio consolidado — 725 RN entre ambas propiedades:</strong> acumulamos 394 RN en CDE + 331 RN en ALR = <strong>725 RN OTB</strong> para junio. El año pasado, en el mismo período (STLY), solo con el hotel teníamos <strong>510 RN</strong>. Diferencia positiva de +215 RN (+42%) — refleja el crecimiento de Costa del Este como destino.</div>
-    </div>
-    <div class="novedad-item">
-      <div class="novedad-dot"></div>
-      <div class="novedad-text"><strong>Pick-up Julio acelerando:</strong> CDE sumó +31 RN en la semana (de 191 a 222); ALR +42 RN (de 110 a 152). El gap vs Budget sigue siendo crítico pero el ritmo de entrada mejora.</div>
-    </div>
-    <div class="novedad-item">
-      <div class="novedad-dot"></div>
-      <div class="novedad-text"><strong>🏆 2x1 por victoria de Argentina:</strong> ante cada victoria de la Selección activamos la promo <strong>2x1</strong> — la noche del partido se abre la venta (BW) y las noches siguientes quedan disponibles a tarifa 2x1 (TW). Activación vigente: BW 22/06 post-partido · TW 23–26/06. Próxima activación prevista: BW 27/06 · TW 29/06–03/07.</div>
-    </div>
-    <div class="novedad-item">
-      <div class="novedad-dot"></div>
-      <div class="novedad-text"><strong>Lanzamiento Fin de Semana Largo Julio:</strong> se activan dos nuevas promociones para el fin de semana largo del 9–12 de julio (Día de la Independencia) en ambas propiedades — ver sección Promociones Vigentes.</div>
-    </div>
-    <div class="novedad-item">
-      <div class="novedad-dot"></div>
-      <div class="novedad-text"><strong>TETE — Presentación en la Costa:</strong> se realizó la presentación de temporada en Costa del Este. TETE se reúne con Plusmar para negociar acuerdo comercial — <em>follow up Roxana próxima semana.</em></div>
-    </div>
-    <div class="novedad-item">
-      <div class="novedad-dot"></div>
-      <div class="novedad-text"><strong>Voucher sorteado — La Reserva:</strong> se sorteó un voucher de alojamiento en ALR.</div>
-    </div>
-    <div class="novedad-item">
-      <div class="novedad-dot"></div>
-      <div class="novedad-text"><strong>Influencer Cecilia Duca — CDE:</strong> reserva del 26 al 28/Jun · incluye gastronómico · va con familia.</div>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- RESERVAS INGRESADAS                            -->
-  <!-- ═══════════════════════════════════════════════ -->
-  <div class="section-header">
-    <span class="icon">📥</span>
-    <span class="title">Reservas Ingresadas esta Semana (17–22 Jun)</span>
-  </div>
-  <div class="section-body">
-
-    <div class="reservas-sub">Costa del Este — 29 reservas</div>
-    <table class="reservas-table">
-      <thead>
-        <tr>
-          <th>Canal / Promoción</th>
-          <th>Reservas</th>
-          <th>%</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Booking.com / BON</td><td>13</td><td>45%</td></tr>
-        <tr><td>Promo Bosque 10% OFF</td><td>6</td><td>21%</td></tr>
-        <tr><td>Last Minute</td><td>2</td><td>7%</td></tr>
-        <tr><td>Mini Invierno 20% OFF</td><td>1</td><td>3%</td></tr>
-        <tr><td>Compra Anticipada</td><td>1</td><td>3%</td></tr>
-        <tr><td>Voucher Papi</td><td>1</td><td>3%</td></tr>
-        <tr><td>Igualamos Tarifa OTA</td><td>1</td><td>3%</td></tr>
-        <tr><td>Full / Rack</td><td>1</td><td>3%</td></tr>
-        <tr><td>Marketing / Complimentary</td><td>2</td><td>7%</td></tr>
-      </tbody>
+        </td>
+      </tr>
     </table>
 
-    <div class="reservas-sub">La Reserva — 31 reservas · 3 Corporativo</div>
-    <table class="reservas-table">
-      <thead>
-        <tr>
-          <th>Canal / Promoción</th>
-          <th>Reservas</th>
-          <th>%</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Booking.com / Airbnb</td><td>15</td><td>48%</td></tr>
-        <tr><td>Brisa 15% OFF</td><td>6</td><td>19%</td></tr>
-        <tr><td>Despegar</td><td>2</td><td>6%</td></tr>
-        <tr><td>Reset 20% OFF</td><td>2</td><td>6%</td></tr>
-        <tr><td>Último Momento 30% OFF</td><td>1</td><td>3%</td></tr>
-        <tr><td>Full Invierno</td><td>1</td><td>3%</td></tr>
-        <tr><td>Directo / Canal Propio</td><td>1</td><td>3%</td></tr>
-        <tr><td>Corporativo / Otros (Allaria, Fiduciantes)</td><td>3</td><td>10%</td></tr>
-      </tbody>
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- LA RESERVA                                  -->
+    <!-- ═══════════════════════════════════════════ -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+      <tr>
+        <td style="background:#0D0D0D;padding:11px 16px;border-radius:8px 8px 0 0;">
+          <span style="font-size:14px;font-weight:700;color:#AE987A;letter-spacing:1px;">ALMARENA LA RESERVA</span>
+          <span style="font-size:11px;color:#555;margin-left:8px;">57 habs</span>
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #E8E3DA;border-top:none;padding:18px;border-radius:0 0 8px 8px;background:#FAFAF9;">
+
+          <!-- ESTADO JUNIO -->
+          <div style="font-size:10px;font-weight:700;color:#AE987A;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">✦ Estado de Junio — On the Books</div>
+          <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;">
+            <tr>
+              <td width="18%" style="background:#FFFFFF;border:1px solid #E8E3DA;border-radius:6px;padding:10px 6px;text-align:center;">
+                <div style="font-size:9px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">OCC</div>
+                <div style="font-size:22px;font-weight:700;color:#1A1A1A;line-height:1;">20%</div>
+                <div style="font-size:9px;color:#6B7280;margin-top:3px;">Bdg 20%</div>
+              </td>
+              <td width="2%"></td>
+              <td width="18%" style="background:#FFFFFF;border:1px solid #E8E3DA;border-radius:6px;padding:10px 6px;text-align:center;">
+                <div style="font-size:9px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">RN</div>
+                <div style="font-size:22px;font-weight:700;color:#1A1A1A;line-height:1;">343</div>
+                <div style="font-size:9px;color:#2E7D4F;margin-top:3px;font-weight:600;">▲ +1 vs bdg</div>
+              </td>
+              <td width="2%"></td>
+              <td width="20%" style="background:#FFFFFF;border:1px solid #E8E3DA;border-radius:6px;padding:10px 6px;text-align:center;">
+                <div style="font-size:9px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">ADR</div>
+                <div style="font-size:16px;font-weight:700;color:#1A1A1A;line-height:1;">$102.314</div>
+                <div style="font-size:9px;color:#CC3333;margin-top:3px;font-weight:600;">▼ −$26.028 vs bdg</div>
+              </td>
+              <td width="2%"></td>
+              <td width="18%" style="background:#FFFFFF;border:1px solid #E8E3DA;border-radius:6px;padding:10px 6px;text-align:center;">
+                <div style="font-size:9px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">RevPAR</div>
+                <div style="font-size:16px;font-weight:700;color:#1A1A1A;line-height:1;">$20.523</div>
+                <div style="font-size:9px;color:#CC3333;margin-top:3px;font-weight:600;">▼ Bdg $25.668</div>
+              </td>
+              <td width="2%"></td>
+              <td width="18%" style="background:#FFFFFF;border:1px solid #E8E3DA;border-radius:6px;padding:10px 6px;text-align:center;">
+                <div style="font-size:9px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Revenue</div>
+                <div style="font-size:15px;font-weight:700;color:#1A1A1A;line-height:1;">$35,1M</div>
+                <div style="font-size:9px;color:#CC3333;margin-top:3px;font-weight:600;">▼ −$8,8M vs bdg</div>
+              </td>
+            </tr>
+          </table>
+
+          <!-- PACE JULIO / AGOSTO / SEPTIEMBRE -->
+          <div style="font-size:10px;font-weight:700;color:#AE987A;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;">✦ Pace — Julio / Agosto / Septiembre</div>
+          <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;margin-bottom:6px;font-size:12px;">
+            <tr style="background:#0D0D0D;">
+              <td style="padding:7px 10px;color:#AE987A;font-weight:700;font-size:10px;letter-spacing:1px;border-radius:4px 0 0 0;width:22%;">MES</td>
+              <td style="padding:7px 10px;color:#9CA3AF;font-weight:600;font-size:10px;text-align:center;">OCC OTB</td>
+              <td style="padding:7px 10px;color:#9CA3AF;font-weight:600;font-size:10px;text-align:center;">RN OTB</td>
+              <td style="padding:7px 10px;color:#9CA3AF;font-weight:600;font-size:10px;text-align:center;">ADR OTB</td>
+              <td style="padding:7px 10px;color:#9CA3AF;font-weight:600;font-size:10px;text-align:center;">Revenue OTB</td>
+              <td style="padding:7px 10px;color:#9CA3AF;font-weight:600;font-size:10px;text-align:right;border-radius:0 4px 0 0;">OCC Bdg</td>
+            </tr>
+            <tr style="background:#FFFFFF;">
+              <td style="padding:8px 10px;font-weight:700;color:#AE987A;border-bottom:1px solid #F0ECE6;">JULIO</td>
+              <td style="padding:8px 10px;text-align:center;font-weight:700;color:#CC3333;border-bottom:1px solid #F0ECE6;">11%</td>
+              <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #F0ECE6;">202</td>
+              <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #F0ECE6;">$141.204</td>
+              <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #F0ECE6;">$28,5M</td>
+              <td style="padding:8px 10px;text-align:right;color:#AE987A;font-weight:700;border-bottom:1px solid #F0ECE6;">30%</td>
+            </tr>
+            <tr style="background:#FAFAF9;">
+              <td style="padding:8px 10px;font-weight:700;color:#AE987A;border-bottom:1px solid #F0ECE6;">AGOSTO</td>
+              <td style="padding:8px 10px;text-align:center;font-weight:700;color:#CC3333;border-bottom:1px solid #F0ECE6;">1%</td>
+              <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #F0ECE6;">25</td>
+              <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #F0ECE6;">$147.021</td>
+              <td style="padding:8px 10px;text-align:center;border-bottom:1px solid #F0ECE6;">$3,7M</td>
+              <td style="padding:8px 10px;text-align:right;color:#AE987A;font-weight:700;border-bottom:1px solid #F0ECE6;">27%</td>
+            </tr>
+            <tr style="background:#FFFFFF;">
+              <td style="padding:8px 10px;font-weight:700;color:#AE987A;">SEPTIEMBRE</td>
+              <td style="padding:8px 10px;text-align:center;font-weight:700;color:#CC3333;">0%</td>
+              <td style="padding:8px 10px;text-align:center;">2</td>
+              <td style="padding:8px 10px;text-align:center;">$101.718</td>
+              <td style="padding:8px 10px;text-align:center;">$0,2M</td>
+              <td style="padding:8px 10px;text-align:right;color:#AE987A;font-weight:700;">28%</td>
+            </tr>
+          </table>
+
+        </td>
+      </tr>
     </table>
-  </div>
 
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- GRUPOS / COTIZACIONES / EVENTOS                -->
-  <!-- ═══════════════════════════════════════════════ -->
-  <div class="section-header">
-    <span class="icon">📋</span>
-    <span class="title">Grupos · Cotizaciones · Eventos</span>
-  </div>
-  <div class="section-body">
-    <table class="grupos-table">
-      <thead>
-        <tr>
-          <th>Estado</th>
-          <th>Grupo / Evento</th>
-          <th>Prop.</th>
-          <th>Fecha</th>
-          <th>Resp.</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><span class="badge badge-ok">✅ Completado</span></td>
-          <td>Allaria SA — salió muy bien · adicionaron noches, desayuno, cafeteras y cápsulas</td>
-          <td>ALR</td>
-          <td>Jun</td>
-          <td>F. Mongiano</td>
-        </tr>
-        <tr>
-          <td><span class="badge badge-ok">✅ Confirmado</span></td>
-          <td>Retiro Comadres</td>
-          <td>CDE</td>
-          <td>—</td>
-          <td>R. Ciccia / M. Forchieri</td>
-        </tr>
-        <tr>
-          <td><span class="badge badge-ok">✅ Confirmado</span></td>
-          <td>FAM Prosa Viajes · 10 clientes</td>
-          <td>CDE</td>
-          <td>31/08–02/09</td>
-          <td>—</td>
-        </tr>
-        <tr>
-          <td><span class="badge badge-ok">✅ Confirmado</span></td>
-          <td>Kapeluz</td>
-          <td>CDE</td>
-          <td>Septiembre</td>
-          <td>—</td>
-        </tr>
-        <tr>
-          <td><span class="badge badge-ok">✅ Confirmado</span></td>
-          <td>Santillana</td>
-          <td>CDE</td>
-          <td>Septiembre</td>
-          <td>R. Ciccia</td>
-        </tr>
-        <tr>
-          <td><span class="badge badge-follow">🔄 Seguimiento</span></td>
-          <td>Banco del Sol — CEO + Directores · está OK</td>
-          <td>CDE</td>
-          <td>Jun–Jul</td>
-          <td>R. Ciccia</td>
-        </tr>
-        <tr>
-          <td><span class="badge badge-cancel">❌ Cancelado</span></td>
-          <td>ADMIFARM</td>
-          <td>CDE</td>
-          <td>Agosto</td>
-          <td>R. Ciccia</td>
-        </tr>
-        <tr>
-          <td><span class="badge badge-follow">🔄 Seguimiento</span></td>
-          <td>Boda Sol y Soledad · 25 rooms</td>
-          <td>CDE</td>
-          <td>Nov 2026</td>
-          <td>R. Ciccia</td>
-        </tr>
-        <tr>
-          <td><span class="badge badge-follow">🔄 Seguimiento</span></td>
-          <td>Alvarez Agis — Fiduciantes Cupo 1</td>
-          <td>ALR</td>
-          <td>Jul 2026</td>
-          <td>F. Mongiano</td>
-        </tr>
-        <tr>
-          <td><span class="badge badge-quoted">📋 Cotizado</span></td>
-          <td>Colectividad Judía — Ruth Mohadeb</td>
-          <td>ALR</td>
-          <td>—</td>
-          <td>F. Mongiano</td>
-        </tr>
-        <tr>
-          <td><span class="badge badge-quoted">📋 Cotizado</span></td>
-          <td>Taller de Redes — solo evento en Almarena</td>
-          <td>CDE</td>
-          <td>Jun 2026</td>
-          <td>R. Ciccia</td>
-        </tr>
-        <tr>
-          <td><span class="badge badge-quoted">📋 Cotizado</span></td>
-          <td>Retiro Yoga — Elizabeth Espinola</td>
-          <td>CDE</td>
-          <td>Sep 2026</td>
-          <td>R. Ciccia</td>
-        </tr>
-        <tr>
-          <td><span class="badge badge-quoted">📋 Cotizado</span></td>
-          <td>Retiro Yoga — Graciela</td>
-          <td>CDE</td>
-          <td>Abr 2027</td>
-          <td>R. Ciccia</td>
-        </tr>
-        <tr>
-          <td><span class="badge badge-quoted">📋 Cotizado</span></td>
-          <td>Grupo Bienestar Pilates — Carolina Acha</td>
-          <td>CDE</td>
-          <td>Nov 2026</td>
-          <td>R. Ciccia</td>
-        </tr>
-        <tr>
-          <td><span class="badge badge-quoted">📋 Cotizado</span></td>
-          <td>Retiro Yoga Kerala</td>
-          <td>CDE</td>
-          <td>Dic 2026</td>
-          <td>R. Ciccia</td>
-        </tr>
-        <tr>
-          <td><span class="badge badge-quoted">📋 Cotizado</span></td>
-          <td>Boda Soledad Eliana — 60 pax</td>
-          <td>CDE</td>
-          <td>Mar 2027</td>
-          <td>R. Ciccia</td>
-        </tr>
-        <tr>
-          <td><span class="badge badge-cancel">❌ Cancelado</span></td>
-          <td>BAF — evento no se realiza</td>
-          <td>ALR</td>
-          <td>—</td>
-          <td>F. Mongiano</td>
-        </tr>
-      </tbody>
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- PICK UP SEMANAL                             -->
+    <!-- ═══════════════════════════════════════════ -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+      <tr>
+        <td style="background:#0D0D0D;padding:11px 16px;border-radius:8px 8px 0 0;">
+          <span style="font-size:13px;font-weight:700;color:#FFFFFF;letter-spacing:1px;">PICK-UP SEMANAL</span>
+          <span style="font-size:11px;color:#555;margin-left:8px;">Reservas ingresadas 22 — 29 de Junio</span>
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #E8E3DA;border-top:none;padding:16px 18px;border-radius:0 0 8px 8px;background:#FAFAF9;">
+          <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;font-size:12px;">
+            <tr style="background:#F5F5F3;">
+              <td style="padding:7px 10px;font-weight:700;color:#6B7280;font-size:10px;text-transform:uppercase;letter-spacing:1px;width:24%;border-bottom:2px solid #E8E3DA;"></td>
+              <td style="padding:7px 10px;font-weight:700;color:#6B7280;font-size:10px;text-transform:uppercase;letter-spacing:1px;text-align:center;border-bottom:2px solid #E8E3DA;">JUNIO</td>
+              <td style="padding:7px 10px;font-weight:700;color:#6B7280;font-size:10px;text-transform:uppercase;letter-spacing:1px;text-align:center;border-bottom:2px solid #E8E3DA;">JULIO</td>
+              <td style="padding:7px 10px;font-weight:700;color:#6B7280;font-size:10px;text-transform:uppercase;letter-spacing:1px;text-align:center;border-bottom:2px solid #E8E3DA;">AGOSTO</td>
+              <td style="padding:7px 10px;font-weight:700;color:#6B7280;font-size:10px;text-transform:uppercase;letter-spacing:1px;text-align:center;border-bottom:2px solid #E8E3DA;">SEPT+</td>
+              <td style="padding:7px 10px;font-weight:700;color:#6B7280;font-size:10px;text-transform:uppercase;letter-spacing:1px;text-align:center;border-bottom:2px solid #E8E3DA;">TOTAL</td>
+            </tr>
+            <tr style="background:#FFFFFF;">
+              <td style="padding:9px 10px;font-weight:700;color:#FA575F;border-bottom:1px solid #F0ECE6;">Costa del Este</td>
+              <td style="padding:9px 10px;text-align:center;font-weight:700;color:#2E7D4F;border-bottom:1px solid #F0ECE6;">+76 RN</td>
+              <td style="padding:9px 10px;text-align:center;font-weight:700;color:#2E7D4F;border-bottom:1px solid #F0ECE6;">+67 RN</td>
+              <td style="padding:9px 10px;text-align:center;font-weight:700;color:#2E7D4F;border-bottom:1px solid #F0ECE6;">+14 RN</td>
+              <td style="padding:9px 10px;text-align:center;font-weight:700;color:#2E7D4F;border-bottom:1px solid #F0ECE6;">+2 RN</td>
+              <td style="padding:9px 10px;text-align:center;font-weight:800;color:#FA575F;border-bottom:1px solid #F0ECE6;">159 RN</td>
+            </tr>
+            <tr style="background:#FAFAF9;">
+              <td style="padding:9px 10px;font-weight:700;color:#AE987A;">La Reserva</td>
+              <td style="padding:9px 10px;text-align:center;font-weight:700;color:#2E7D4F;">+22 RN</td>
+              <td style="padding:9px 10px;text-align:center;font-weight:700;color:#2E7D4F;">+58 RN</td>
+              <td style="padding:9px 10px;text-align:center;font-weight:700;color:#2E7D4F;">+1 RN</td>
+              <td style="padding:9px 10px;text-align:center;font-weight:700;color:#2E7D4F;">+11 RN</td>
+              <td style="padding:9px 10px;text-align:center;font-weight:800;color:#AE987A;">92 RN</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
     </table>
-  </div>
 
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- PROMOCIONES VIGENTES                           -->
-  <!-- ═══════════════════════════════════════════════ -->
-  <div class="section-header">
-    <span class="icon">🏷️</span>
-    <span class="title">Promociones Vigentes</span>
-  </div>
-  <div class="section-body">
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- RESERVAS POR ORGANIZACIÓN                   -->
+    <!-- ═══════════════════════════════════════════ -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+      <tr>
+        <td style="background:#0D0D0D;padding:11px 16px;border-radius:8px 8px 0 0;">
+          <span style="font-size:13px;font-weight:700;color:#FFFFFF;letter-spacing:1px;">RESERVAS INGRESADAS POR ORGANIZACIÓN</span>
+          <span style="font-size:11px;color:#555;margin-left:8px;">22 — 29 de Junio</span>
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #E8E3DA;border-top:none;padding:16px 18px;border-radius:0 0 8px 8px;background:#FAFAF9;">
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr valign="top">
 
-    <div class="promo-prop-title">Costa del Este</div>
+              <!-- CDE -->
+              <td width="49%" style="padding-right:10px;">
+                <div style="font-size:10px;font-weight:700;color:#FA575F;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;">Costa del Este</div>
+                <table width="100%" cellpadding="0" cellspacing="0" style="font-size:12px;border-collapse:collapse;">
+                  <tr style="background:#F5F5F3;">
+                    <td style="padding:5px 8px;font-weight:700;color:#6B7280;font-size:10px;text-transform:uppercase;border-bottom:2px solid #E8E3DA;">Organización / Canal</td>
+                    <td style="padding:5px 8px;font-weight:700;color:#6B7280;font-size:10px;text-transform:uppercase;border-bottom:2px solid #E8E3DA;text-align:center;">Res.</td>
+                    <td style="padding:5px 8px;font-weight:700;color:#6B7280;font-size:10px;text-transform:uppercase;border-bottom:2px solid #E8E3DA;text-align:center;">RN</td>
+                  </tr>
+                  <tr style="background:#FFFFFF;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Promo Bosque 10%</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">10</td><td style="padding:5px 8px;text-align:center;font-weight:700;color:#2E7D4F;border-bottom:1px solid #F0ECE6;">26</td></tr>
+                  <tr style="background:#FAFAF9;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Booking.com</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">9</td><td style="padding:5px 8px;text-align:center;font-weight:700;color:#2E7D4F;border-bottom:1px solid #F0ECE6;">25</td></tr>
+                  <tr style="background:#FFFFFF;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Finde Largo Julio</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">6</td><td style="padding:5px 8px;text-align:center;font-weight:700;color:#2E7D4F;border-bottom:1px solid #F0ECE6;">18</td></tr>
+                  <tr style="background:#FAFAF9;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Full Invierno 25%</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">4</td><td style="padding:5px 8px;text-align:center;font-weight:700;color:#2E7D4F;border-bottom:1px solid #F0ECE6;">17</td></tr>
+                  <tr style="background:#FFFFFF;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Bettina Alba (grupo)</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">7</td><td style="padding:5px 8px;text-align:center;font-weight:700;color:#2E7D4F;border-bottom:1px solid #F0ECE6;">17</td></tr>
+                  <tr style="background:#FAFAF9;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Promo Mar 20%</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">3</td><td style="padding:5px 8px;text-align:center;font-weight:700;color:#2E7D4F;border-bottom:1px solid #F0ECE6;">12</td></tr>
+                  <tr style="background:#FFFFFF;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Igualamos Tarifa OTA</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">6</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">10</td></tr>
+                  <tr style="background:#FAFAF9;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Last Minute</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">7</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">7</td></tr>
+                  <tr style="background:#FFFFFF;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">2x1 Mundial</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">3</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">6</td></tr>
+                  <tr style="background:#FAFAF9;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Vacaciones para 2</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">2</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">5</td></tr>
+                  <tr style="background:#FFFFFF;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Mini Invierno 20%</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">2</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">4</td></tr>
+                  <tr style="background:#FAFAF9;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Full</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">3</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">4</td></tr>
+                  <tr style="background:#FFFFFF;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Compra Anticipada</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">1</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">3</td></tr>
+                  <tr style="background:#FAFAF9;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Escapada Romántica</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">1</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">1</td></tr>
+                  <tr style="background:#FFFFFF;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Descuento Especial</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">1</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">2</td></tr>
+                  <tr style="background:#F5F5F3;"><td style="padding:6px 8px;font-weight:700;color:#FA575F;">TOTAL</td><td style="padding:6px 8px;text-align:center;font-weight:700;color:#FA575F;">66</td><td style="padding:6px 8px;text-align:center;font-weight:700;color:#FA575F;">159</td></tr>
+                </table>
+              </td>
 
-    <div class="promo-item">
-      <div class="promo-dash">—</div>
-      <div class="promo-text"><strong>Fin de Semana Largo Julio 20% OFF</strong> <span class="promo-new">NUEVO</span> — Mín. 3 noches · Check-in Jue 9/Jul · TW 9–12 Jul · Incluye feriado · No acumulable</div>
-    </div>
-    <div class="promo-item">
-      <div class="promo-dash">—</div>
-      <div class="promo-text"><strong>Promo Bosque 10%</strong> — 2-3 noches · TW hasta 17/07</div>
-    </div>
-    <div class="promo-item">
-      <div class="promo-dash">—</div>
-      <div class="promo-text"><strong>Mini Vacaciones de Invierno</strong> — 2-3 noches · 15% off</div>
-    </div>
-    <div class="promo-item">
-      <div class="promo-dash">—</div>
-      <div class="promo-text"><strong>Full Vacaciones de Invierno</strong> — 4+ noches · 25% off</div>
-    </div>
-    <div class="promo-item">
-      <div class="promo-dash">—</div>
-      <div class="promo-text"><strong>2x1 Mundial</strong> — BW 22/06 post partido · TW 23–26/06 · Próx. acción: BW 27/06 post partido · TW 29/06–03/07</div>
-    </div>
-    <div class="promo-item">
-      <div class="promo-dash">—</div>
-      <div class="promo-text"><strong>Compra Anticipada</strong> — Ago–Nov · Incl. feriados</div>
-    </div>
-    <div class="promo-item">
-      <div class="promo-dash">—</div>
-      <div class="promo-text"><strong>3x2 + 65 años</strong> — Dom a Jue · TW 17/06–31/08 · Sin vacaciones de invierno ni feriados</div>
-    </div>
+              <td width="2%"></td>
 
-    <div class="promo-prop-title">La Reserva</div>
+              <!-- ALR -->
+              <td width="49%" style="padding-left:10px;">
+                <div style="font-size:10px;font-weight:700;color:#AE987A;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;">La Reserva</div>
+                <table width="100%" cellpadding="0" cellspacing="0" style="font-size:12px;border-collapse:collapse;">
+                  <tr style="background:#F5F5F3;">
+                    <td style="padding:5px 8px;font-weight:700;color:#6B7280;font-size:10px;text-transform:uppercase;border-bottom:2px solid #E8E3DA;">Organización / Canal</td>
+                    <td style="padding:5px 8px;font-weight:700;color:#6B7280;font-size:10px;text-transform:uppercase;border-bottom:2px solid #E8E3DA;text-align:center;">Res.</td>
+                    <td style="padding:5px 8px;font-weight:700;color:#6B7280;font-size:10px;text-transform:uppercase;border-bottom:2px solid #E8E3DA;text-align:center;">RN</td>
+                  </tr>
+                  <tr style="background:#FFFFFF;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Booking.com</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">5</td><td style="padding:5px 8px;text-align:center;font-weight:700;color:#2E7D4F;border-bottom:1px solid #F0ECE6;">17</td></tr>
+                  <tr style="background:#FAFAF9;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Finde XXL Julio</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">2</td><td style="padding:5px 8px;text-align:center;font-weight:700;color:#2E7D4F;border-bottom:1px solid #F0ECE6;">10</td></tr>
+                  <tr style="background:#FFFFFF;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Mini Invierno</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">2</td><td style="padding:5px 8px;text-align:center;font-weight:700;color:#2E7D4F;border-bottom:1px solid #F0ECE6;">8</td></tr>
+                  <tr style="background:#FAFAF9;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Despegar</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">4</td><td style="padding:5px 8px;text-align:center;font-weight:700;color:#2E7D4F;border-bottom:1px solid #F0ECE6;">8</td></tr>
+                  <tr style="background:#FFFFFF;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">2x1 Mundial</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">3</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">7</td></tr>
+                  <tr style="background:#FAFAF9;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Chelini Viviana</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">1</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">5</td></tr>
+                  <tr style="background:#FFFFFF;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Finde Largo XXL</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">1</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">4</td></tr>
+                  <tr style="background:#FAFAF9;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Directo</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">1</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">4</td></tr>
+                  <tr style="background:#FFFFFF;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">4 Ambientes</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">1</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">4</td></tr>
+                  <tr style="background:#FAFAF9;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Olex Global / Brusco</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">1</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">4</td></tr>
+                  <tr style="background:#FFFFFF;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Brisa 15%</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">2</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">4</td></tr>
+                  <tr style="background:#FAFAF9;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Airbnb</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">1</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">3</td></tr>
+                  <tr style="background:#FFFFFF;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Igualamos Tarifa OTA</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">1</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">3</td></tr>
+                  <tr style="background:#FAFAF9;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Patricio Hokama</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">1</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">3</td></tr>
+                  <tr style="background:#FFFFFF;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">F&amp;F / Referidos</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">1</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">2</td></tr>
+                  <tr style="background:#FAFAF9;"><td style="padding:5px 8px;border-bottom:1px solid #F0ECE6;">Submural S.A</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">2</td><td style="padding:5px 8px;text-align:center;border-bottom:1px solid #F0ECE6;">1</td></tr>
+                  <tr style="background:#F5F5F3;"><td style="padding:6px 8px;font-weight:700;color:#AE987A;">TOTAL</td><td style="padding:6px 8px;text-align:center;font-weight:700;color:#AE987A;">30</td><td style="padding:6px 8px;text-align:center;font-weight:700;color:#AE987A;">92</td></tr>
+                </table>
+              </td>
 
-    <div class="promo-item">
-      <div class="promo-dash">—</div>
-      <div class="promo-text"><strong>Fin de Semana Largo Julio 20% OFF</strong> <span class="promo-new">NUEVO</span> — Mín. 3 noches · Check-in Jue 9/Jul · TW 9–12 Jul · Incluye feriado · No acumulable</div>
-    </div>
-    <div class="promo-item">
-      <div class="promo-dash">—</div>
-      <div class="promo-text"><strong>Promo Brisa 15%</strong> — 2-3 noches · TW hasta 30/11</div>
-    </div>
-    <div class="promo-item">
-      <div class="promo-dash">—</div>
-      <div class="promo-text"><strong>Promo Reset 20%</strong> — 4+ noches · TW hasta 30/11</div>
-    </div>
-    <div class="promo-item">
-      <div class="promo-dash">—</div>
-      <div class="promo-text"><strong>Mini Vacaciones de Invierno</strong> — 3-4 noches · 25% off</div>
-    </div>
-    <div class="promo-item">
-      <div class="promo-dash">—</div>
-      <div class="promo-text"><strong>Full Vacaciones de Invierno</strong> — 5+ noches · 35% off</div>
-    </div>
-    <div class="promo-item">
-      <div class="promo-dash">—</div>
-      <div class="promo-text"><strong>2x1 Mundial</strong> — BW 22/06 post partido · TW 23–26/06 · Próx. acción: BW 27/06 post partido · TW 29/06–03/07</div>
-    </div>
-    <div class="promo-item">
-      <div class="promo-dash">—</div>
-      <div class="promo-text"><strong>Último Momento 30% OFF</strong> — Activa · 1 reserva ingresada esta semana</div>
-    </div>
-    <div class="promo-item">
-      <div class="promo-dash">—</div>
-      <div class="promo-text"><strong>40% off 4 Ambientes</strong> — Mín 3 noches · Activo hasta Nov</div>
-    </div>
-    <div class="promo-item">
-      <div class="promo-dash">—</div>
-      <div class="promo-text"><strong>40% Allaria F&amp;F Referidos</strong> — Junio hasta 17/Jul</div>
-    </div>
-    <div class="promo-item">
-      <div class="promo-dash">—</div>
-      <div class="promo-text"><strong>Full Invierno</strong> — 1 reserva para Julio (5 noches)</div>
-    </div>
-    <div class="promo-item">
-      <div class="promo-dash">—</div>
-      <div class="promo-text"><strong>3x2 + 65 años</strong> — Dom a Jue · TW 17/06–31/08 · Sin vacaciones de invierno ni feriados</div>
-    </div>
-    <div class="promo-item">
-      <div class="promo-dash">—</div>
-      <div class="promo-text"><strong>AIRBNB</strong> — Descuento % por anuncio nuevo</div>
-    </div>
-
-    <div class="promo-prop-title">Beneficios Empresariales · CDE + ALR</div>
-    <table class="bene-table">
-      <thead>
-        <tr>
-          <th>Empresa</th>
-          <th>Condiciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>MASLOW</td>
-          <td>25% temp. media · 15% temp. baja · No aplica temp. alta · Prepago no reembolsable · Cupo 3 hab/día</td>
-        </tr>
-        <tr>
-          <td>OSDE</td>
-          <td>10% CDE · 15% ALR · Sobre tarifa promocional por temporada</td>
-        </tr>
-        <tr>
-          <td>CONSEJO DE ECONÓMICAS</td>
-          <td>25% temp. baja · 15% temp. media · Prepago · Sin temp. alta ni feriados largos · Vigente hasta 16/04/2027</td>
-        </tr>
-        <tr>
-          <td>AMATRA 2026–2027</td>
-          <td>10% temp. alta · 20% temp. media · 25% temp. baja · Early/Late CO s/dispo · Upgrade s/dispo<br>CDE — Desayuno en NOI + acceso instalaciones | ALR — Acceso instalaciones</td>
-        </tr>
-      </tbody>
+            </tr>
+          </table>
+        </td>
+      </tr>
     </table>
-  </div>
 
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- ACCIONES & PRÓXIMOS PASOS                      -->
-  <!-- ═══════════════════════════════════════════════ -->
-  <div class="section-header">
-    <span class="icon">✅</span>
-    <span class="title">Acciones &amp; Próximos Pasos</span>
-  </div>
-  <div class="section-body">
-    <div class="novedad-item">
-      <div class="novedad-dot"></div>
-      <div class="novedad-text"><strong>Facturación de eventos:</strong> llevar al día <em>antes</em> de la fecha indicada en la carta oferta para poder reclamar los pagos a los clientes. Todo el folio debe estar cerrado cuando el grupo se retira.</div>
-    </div>
-    <div class="novedad-item">
-      <div class="novedad-dot"></div>
-      <div class="novedad-text"><strong>Plusmar / TETE:</strong> Roxana hace follow up la próxima semana para cerrar el acuerdo.</div>
-    </div>
-    <div class="novedad-item">
-      <div class="novedad-dot"></div>
-      <div class="novedad-text"><strong>Grupos ALR — pipeline Fer:</strong> confirmar disponibilidad y condiciones para Taller de Redes, Retiro Yoga Graciela (Abril 2027) y Retiro Yoga Kerala (temporada alta).</div>
-    </div>
-  </div>
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- NOVEDADES DE LA SEMANA                      -->
+    <!-- ═══════════════════════════════════════════ -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+      <tr>
+        <td style="background:#0D0D0D;padding:11px 16px;border-radius:8px 8px 0 0;">
+          <span style="font-size:13px;font-weight:700;color:#FFFFFF;letter-spacing:1px;">NOVEDADES DE LA SEMANA</span>
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #E8E3DA;border-top:none;padding:16px 18px;border-radius:0 0 8px 8px;background:#FAFAF9;">
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+              <td style="padding:6px 0;font-size:13px;color:#374151;border-bottom:1px solid #F0ECE6;">
+                <span style="color:#AE987A;font-weight:700;">✦</span>&nbsp; En producción de noches sumando ambas unidades de negocio, cerramos Junio con <strong>794 RN totales</strong> (CDE 451 + ALR 343), versus las <strong>547 RN</strong> que registró el hotel solo en Junio del año pasado. El crecimiento de volumen consolidado refleja el impacto de operar doble inventario.
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:6px 0;font-size:13px;color:#374151;border-bottom:1px solid #F0ECE6;">
+                <span style="color:#AE987A;font-weight:700;">✦</span>&nbsp; Se activa nueva promo <strong>"Vacaciones para 2"</strong> en Hotel (25% off en Suite Ejecutiva, Suite Superior, Studio, Studio Superior y Studio Almarena — mín. 2 noches) y en ALR (25% off 2 AMB Bosque — mín. 2 noches).
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:6px 0;font-size:13px;color:#374151;border-bottom:1px solid #F0ECE6;">
+                <span style="color:#AE987A;font-weight:700;">✦</span>&nbsp; Se incorporan <strong>días de spa con desayuno / almuerzo</strong> disponibles para fines de semana y días de semana.
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:6px 0;font-size:13px;color:#374151;border-bottom:1px solid #F0ECE6;">
+                <span style="color:#AE987A;font-weight:700;">✦</span>&nbsp; <strong>Acción comercial 2x1 estratégica — Partidos de Argentina:</strong> la promoción activada en los días de partido generó <strong>6 reservas en 2 partidos</strong>, validando el modelo. La próxima acción está planificada para el próximo partido de la Selección Argentina.
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:6px 0;font-size:13px;color:#374151;border-bottom:1px solid #F0ECE6;">
+                <span style="color:#AE987A;font-weight:700;">✦</span>&nbsp; Se avanza en la planificación de <strong>actividades de recreación para Vacaciones de Invierno</strong>, orientadas a que los niños tengan propuestas disponibles durante su estadía.
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:6px 0;font-size:13px;color:#374151;border-bottom:1px solid #F0ECE6;">
+                <span style="color:#AE987A;font-weight:700;">✦</span>&nbsp; Se está evaluando la incorporación de un <strong>CRM con IA para cotización automática</strong> de grupos y eventos — actualmente en comparación de presupuestos entre distintas opciones.
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:6px 0;font-size:13px;color:#374151;">
+                <span style="color:#AE987A;font-weight:700;">✦</span>&nbsp; Se evaluará la posibilidad de <strong>migrar el motor de reservas a PXSOL</strong>. La falta de respuesta por parte de BON hace necesario contar con un proveedor que garantice soporte y agilidad operativa.
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- GRUPOS & EVENTOS                            -->
+    <!-- ═══════════════════════════════════════════ -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+      <tr>
+        <td style="background:#0D0D0D;padding:11px 16px;border-radius:8px 8px 0 0;">
+          <span style="font-size:14px;font-weight:700;color:#FFFFFF;letter-spacing:1px;">📋 Grupos · Cotizaciones · Eventos</span>
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #E8E3DA;border-top:none;border-radius:0 0 8px 8px;overflow:hidden;">
+          <div style="background:#FEF9EF;border-bottom:1px solid #E8E3DA;padding:10px 16px;">
+            <span style="font-size:11px;font-weight:700;color:#92650A;text-transform:uppercase;letter-spacing:1px;">📅 Próximos grupos confirmados</span><br>
+            <span style="font-size:13px;color:#78350F;">• <strong>Santillana S.A</strong> · 14–17 Sept (CDE) &nbsp;&nbsp;|&nbsp;&nbsp; <strong>Kapelusz Editora SA</strong> · 22–24 Sept (CDE) &nbsp;&nbsp;|&nbsp;&nbsp; <strong>Retiro Yoga Daniela</strong> · 30 Oct–1 Nov (CDE)</span>
+          </div>
+          <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+            <tr style="background:#F5F5F3;">
+              <td style="padding:7px 14px;font-weight:700;color:#6B7280;font-size:10px;text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid #E8E3DA;">Grupo / Evento</td>
+              <td style="padding:7px 10px;font-weight:700;color:#6B7280;font-size:10px;text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid #E8E3DA;">Fecha</td>
+              <td style="padding:7px 10px;font-weight:700;color:#6B7280;font-size:10px;text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid #E8E3DA;">Estado</td>
+              <td style="padding:7px 10px;font-weight:700;color:#6B7280;font-size:10px;text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid #E8E3DA;">Resp.</td>
+            </tr>
+            <!-- CONFIRMADOS -->
+            <tr style="background:#F9F9F7;border-bottom:1px solid #F3F4F6;">
+              <td style="padding:7px 14px;font-size:12px;color:#9CA3AF;font-style:italic;">Allaria RRHH · ALR + CDE</td>
+              <td style="padding:7px 10px;font-size:12px;color:#9CA3AF;font-style:italic;">Jun 2026</td>
+              <td style="padding:7px 10px;"><span style="background:#F3F4F6;color:#9CA3AF;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;">✓ Realizado</span></td>
+              <td style="padding:7px 10px;font-size:11px;color:#9CA3AF;">R. Ciccia</td>
+            </tr>
+            <tr style="background:#FFFFFF;border-bottom:1px solid #F3F4F6;">
+              <td style="padding:7px 14px;font-size:12px;color:#1A1A1A;">Santillana S.A · CDE</td>
+              <td style="padding:7px 10px;font-size:12px;color:#6B7280;">14–17 Sept</td>
+              <td style="padding:7px 10px;"><span style="background:#DCFCE7;color:#15803D;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;">✅ Confirmado</span></td>
+              <td style="padding:7px 10px;font-size:11px;color:#6B7280;">R. Ciccia</td>
+            </tr>
+            <tr style="background:#FAFAF9;border-bottom:1px solid #F3F4F6;">
+              <td style="padding:7px 14px;font-size:12px;color:#1A1A1A;">Kapelusz Editora SA · CDE</td>
+              <td style="padding:7px 10px;font-size:12px;color:#6B7280;">22–24 Sept</td>
+              <td style="padding:7px 10px;"><span style="background:#DCFCE7;color:#15803D;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;">✅ Confirmado</span></td>
+              <td style="padding:7px 10px;font-size:11px;color:#6B7280;">R. Ciccia</td>
+            </tr>
+            <tr style="background:#FFFFFF;border-bottom:1px solid #F3F4F6;">
+              <td style="padding:7px 14px;font-size:12px;color:#1A1A1A;">Retiro Yoga Daniela · 10 habs · CDE</td>
+              <td style="padding:7px 10px;font-size:12px;color:#6B7280;">30/10–01/11</td>
+              <td style="padding:7px 10px;"><span style="background:#DCFCE7;color:#15803D;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;">✅ Confirmado</span></td>
+              <td style="padding:7px 10px;font-size:11px;color:#6B7280;">R. Ciccia</td>
+            </tr>
+            <tr style="background:#FAFAF9;border-bottom:1px solid #F3F4F6;">
+              <td style="padding:7px 14px;font-size:12px;color:#1A1A1A;">De Rose</td>
+              <td style="padding:7px 10px;font-size:12px;color:#6B7280;">Noviembre 2026</td>
+              <td style="padding:7px 10px;"><span style="background:#DCFCE7;color:#15803D;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;">✅ Confirmado</span></td>
+              <td style="padding:7px 10px;font-size:11px;color:#6B7280;">—</td>
+            </tr>
+            <!-- SEGUIMIENTO -->
+            <tr style="background:#FFFFFF;border-bottom:1px solid #F3F4F6;">
+              <td style="padding:7px 14px;font-size:12px;color:#1A1A1A;">FAM Prosa Viajes · 10 clientes</td>
+              <td style="padding:7px 10px;font-size:12px;color:#6B7280;">31/08–02/09</td>
+              <td style="padding:7px 10px;"><span style="background:#FEF9C3;color:#854D0E;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;">🔄 Seguimiento</span></td>
+              <td style="padding:7px 10px;font-size:11px;color:#6B7280;">—</td>
+            </tr>
+            <tr style="background:#FAFAF9;border-bottom:1px solid #F3F4F6;">
+              <td style="padding:7px 14px;font-size:12px;color:#1A1A1A;">ADIFARM · 7 habs</td>
+              <td style="padding:7px 10px;font-size:12px;color:#6B7280;">Agosto</td>
+              <td style="padding:7px 10px;"><span style="background:#FEF9C3;color:#854D0E;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;">🔄 En análisis</span></td>
+              <td style="padding:7px 10px;font-size:11px;color:#6B7280;">R. Ciccia</td>
+            </tr>
+            <tr style="background:#FFFFFF;border-bottom:1px solid #F3F4F6;">
+              <td style="padding:7px 14px;font-size:12px;color:#1A1A1A;">Boda Eliana · 60 pax · CDE</td>
+              <td style="padding:7px 10px;font-size:12px;color:#6B7280;">Marzo 2027</td>
+              <td style="padding:7px 10px;"><span style="background:#FEF9C3;color:#854D0E;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;">🔄 Seguimiento</span></td>
+              <td style="padding:7px 10px;font-size:11px;color:#6B7280;">R. Ciccia</td>
+            </tr>
+            <tr style="background:#FAFAF9;border-bottom:1px solid #F3F4F6;">
+              <td style="padding:7px 14px;font-size:12px;color:#1A1A1A;">Taller de Redes · Solo evento · CDE</td>
+              <td style="padding:7px 10px;font-size:12px;color:#6B7280;">Junio 2026</td>
+              <td style="padding:7px 10px;"><span style="background:#FEF9C3;color:#854D0E;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;">🔄 Seguimiento</span></td>
+              <td style="padding:7px 10px;font-size:11px;color:#6B7280;">R. Ciccia</td>
+            </tr>
+            <!-- COTIZADOS / SIN NOVEDADES -->
+            <tr style="background:#FFFFFF;border-bottom:1px solid #F3F4F6;">
+              <td style="padding:7px 14px;font-size:12px;color:#1A1A1A;">Boda Sol · 25 habs · $155K · CDE</td>
+              <td style="padding:7px 10px;font-size:12px;color:#6B7280;">Noviembre 2026</td>
+              <td style="padding:7px 10px;"><span style="background:#DBEAFE;color:#1D4ED8;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;">📋 Cotizado</span></td>
+              <td style="padding:7px 10px;font-size:11px;color:#6B7280;">R. Ciccia</td>
+            </tr>
+            <tr style="background:#FAFAF9;border-bottom:1px solid #F3F4F6;">
+              <td style="padding:7px 14px;font-size:12px;color:#1A1A1A;">Retiro Yoga Elizabeth Espinola · 20 pax · $115K · CDE</td>
+              <td style="padding:7px 10px;font-size:12px;color:#6B7280;">Sept 2026</td>
+              <td style="padding:7px 10px;"><span style="background:#DBEAFE;color:#1D4ED8;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;">📋 Cotizado</span></td>
+              <td style="padding:7px 10px;font-size:11px;color:#6B7280;">R. Ciccia</td>
+            </tr>
+            <tr style="background:#FFFFFF;border-bottom:1px solid #F3F4F6;">
+              <td style="padding:7px 14px;font-size:12px;color:#1A1A1A;">Retiro Yoga Graciela · 6 pax · $165K · CDE</td>
+              <td style="padding:7px 10px;font-size:12px;color:#6B7280;">09–11 Abr 2027</td>
+              <td style="padding:7px 10px;"><span style="background:#DBEAFE;color:#1D4ED8;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;">📋 Cotizado</span></td>
+              <td style="padding:7px 10px;font-size:11px;color:#6B7280;">R. Ciccia</td>
+            </tr>
+            <tr style="background:#FAFAF9;border-bottom:1px solid #F3F4F6;">
+              <td style="padding:7px 14px;font-size:12px;color:#1A1A1A;">Grupo Familias Ortodoxas</td>
+              <td style="padding:7px 10px;font-size:12px;color:#6B7280;">—</td>
+              <td style="padding:7px 10px;"><span style="background:#DBEAFE;color:#1D4ED8;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;">📋 Sin novedades</span></td>
+              <td style="padding:7px 10px;font-size:11px;color:#6B7280;">F. Mongiano</td>
+            </tr>
+            <tr style="background:#FFFFFF;border-bottom:1px solid #F3F4F6;">
+              <td style="padding:7px 14px;font-size:12px;color:#1A1A1A;">Colectividad Judía ALR · Ruth Mohadeb</td>
+              <td style="padding:7px 10px;font-size:12px;color:#6B7280;">—</td>
+              <td style="padding:7px 10px;"><span style="background:#DBEAFE;color:#1D4ED8;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;">📋 Cotizado</span></td>
+              <td style="padding:7px 10px;font-size:11px;color:#6B7280;">F. Mongiano</td>
+            </tr>
+            <tr style="background:#FAFAF9;">
+              <td style="padding:7px 14px;font-size:12px;color:#1A1A1A;">Rotary Social Club</td>
+              <td style="padding:7px 10px;font-size:12px;color:#6B7280;">—</td>
+              <td style="padding:7px 10px;"><span style="background:#DBEAFE;color:#1D4ED8;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;">📋 Cotizado</span></td>
+              <td style="padding:7px 10px;font-size:11px;color:#6B7280;">M. Forchieri</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- PROMOCIONES VIGENTES                        -->
+    <!-- ═══════════════════════════════════════════ -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+      <tr>
+        <td style="background:#0D0D0D;padding:11px 16px;border-radius:8px 8px 0 0;">
+          <span style="font-size:13px;font-weight:700;color:#FFFFFF;letter-spacing:1px;">PROMOCIONES VIGENTES</span>
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #E8E3DA;border-top:none;padding:16px 18px;border-radius:0 0 8px 8px;background:#FAFAF9;">
+
+          <!-- HOTEL -->
+          <div style="font-size:10px;font-weight:700;color:#FA575F;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;">Hotel — Costa del Este</div>
+          <table width="100%" cellpadding="0" cellspacing="0" style="font-size:12px;margin-bottom:16px;">
+            <tr><td style="padding:5px 0;border-bottom:1px solid #F0ECE6;color:#374151;">🟢 <strong>Vacaciones para 2</strong> · 25% off · Suite Ejec, Suite Sup, Studio, Studio Sup, Studio Almarena · Mín 2 noches <span style="background:#FEE2E2;color:#991B1B;font-size:10px;font-weight:700;padding:1px 6px;border-radius:8px;margin-left:4px;">NUEVA</span></td></tr>
+            <tr><td style="padding:5px 0;border-bottom:1px solid #F0ECE6;color:#374151;">🟡 <strong>Last Minute 20%</strong> · Sin mínimo · Hasta el 2 de Junio inclusive</td></tr>
+            <tr><td style="padding:5px 0;border-bottom:1px solid #F0ECE6;color:#374151;">🟢 <strong>Booking 30% Getaway</strong> · BW 26/03–30/06 · Excluye feriados</td></tr>
+            <tr><td style="padding:5px 0;border-bottom:1px solid #F0ECE6;color:#374151;">🟢 <strong>Promo Bosque 10%</strong> · 2-3 noches · TW 01/03–30/06 · Incluye feriados</td></tr>
+            <tr><td style="padding:5px 0;border-bottom:1px solid #F0ECE6;color:#374151;">🟢 <strong>Promo Mar 20%</strong> · 4+ noches · TW 01/03–30/06 · Incluye feriados</td></tr>
+            <tr><td style="padding:5px 0;border-bottom:1px solid #F0ECE6;color:#374151;">🟢 <strong>Preventa Vacaciones de Invierno</strong> · Promo 1: 4n 20% / Promo 2: 5n+ 30%</td></tr>
+            <tr><td style="padding:5px 0;color:#374151;">🟢 <strong>Compra Anticipada</strong> · Agosto–Noviembre · Incluye feriados · Excluye vac. invierno</td></tr>
+          </table>
+
+          <!-- ALR -->
+          <div style="font-size:10px;font-weight:700;color:#AE987A;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;">ALR — La Reserva</div>
+          <table width="100%" cellpadding="0" cellspacing="0" style="font-size:12px;">
+            <tr><td style="padding:5px 0;border-bottom:1px solid #F0ECE6;color:#374151;">🟢 <strong>Vacaciones para 2</strong> · 25% off · 2 AMB Bosque · Mín 2 noches <span style="background:#FEF3C7;color:#92400E;font-size:10px;font-weight:700;padding:1px 6px;border-radius:8px;margin-left:4px;">NUEVA</span></td></tr>
+            <tr><td style="padding:5px 0;border-bottom:1px solid #F0ECE6;color:#374151;">🟡 <strong>Last Minute 30%</strong> · Sin mínimo · Hasta el 2 de Junio inclusive</td></tr>
+            <tr><td style="padding:5px 0;border-bottom:1px solid #F0ECE6;color:#374151;">🟢 <strong>Booking 30% + Despegar Getaway</strong> · Excluye feriados</td></tr>
+            <tr><td style="padding:5px 0;border-bottom:1px solid #F0ECE6;color:#374151;">🟢 <strong>Early Booker Deal 15%</strong> · +15 días antes del check-in (Booking)</td></tr>
+            <tr><td style="padding:5px 0;border-bottom:1px solid #F0ECE6;color:#374151;">🟢 <strong>Booking 15% Mobile App</strong></td></tr>
+            <tr><td style="padding:5px 0;border-bottom:1px solid #F0ECE6;color:#374151;">🟢 <strong>Promo Brisa 15%</strong> · 2-3 noches · TW 01/03–30/06 · Incluye feriados</td></tr>
+            <tr><td style="padding:5px 0;border-bottom:1px solid #F0ECE6;color:#374151;">🟢 <strong>Promo Reset 20%</strong> · 4+ noches · TW 01/03–30/06 · Incluye feriados</td></tr>
+            <tr><td style="padding:5px 0;border-bottom:1px solid #F0ECE6;color:#374151;">🟢 <strong>40% Allaria, F&amp;F Referidos</strong> · Junio</td></tr>
+            <tr><td style="padding:5px 0;border-bottom:1px solid #F0ECE6;color:#374151;">🟢 <strong>40% off 4 Ambientes</strong> · Activo hasta Noviembre · Min 3 noches</td></tr>
+            <tr><td style="padding:5px 0;color:#374151;">🟢 <strong>Preventa Vac. Invierno</strong> · Mini 3/4n 25% / Full 5n+ 35%</td></tr>
+          </table>
+
+        </td>
+      </tr>
+    </table>
+
+  </td></tr>
 
   <!-- FOOTER -->
-  <div class="footer">
-    <div class="footer-sign">Gracias a todos por participar. Quedo a disposición ante cualquier duda.</div>
-    <div class="footer-sign" style="margin-top:12px;"><strong>Chiara Zannini</strong> Revenue Management · Almarena</div>
-    <div class="footer-sub" style="margin-top:8px;">Almarena · Costa del Este · La Reserva · Reunión semanal de Revenue Management</div>
-  </div>
+  <tr>
+    <td style="background:#0D0D0D;padding:18px 32px;">
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td style="font-size:11px;color:#4B5563;">Revenue Management · Almarena · 29 de Junio de 2026</td>
+          <td align="right" style="font-size:11px;color:#AE987A;font-weight:700;letter-spacing:2px;">ALMARENA</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
 
-</div>
+</table>
+</td></tr>
+</table>
+
 </body>
 </html>
